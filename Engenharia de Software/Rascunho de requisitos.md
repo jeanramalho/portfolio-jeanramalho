@@ -2,4 +2,4 @@
 
 ## Objetivo
 
-- Criar um sistema de portfólio pessoal, que terá um banco de dados para se alimentar com as informações pessoais e profissionais. Esse backend será gerenciado por um portal admin, também criado com frontend para que possam ser inseridas as inforções do portifólio, criadas, excluídas e gerenciadas as sessões do portfólio.
+- Criar um sistema de portfólio pessoal, que terá um banco de dados para se alimentar com as informações pessoais e profissionais. Esse backend será gerenciado por um portal admin, também criado com frontend para que possam ser inseridas as inforções do portifólio, criadas, excluídas e gerenciadas as sessões do portfólio. No portal admin também será possível definir como serão preenchidas e o design das sessões.
