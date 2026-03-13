@@ -17,3 +17,8 @@
 - Nodejs
 - Express
 - Supabase
+
+### Arquitetura
+
+- MVVM para frontend
+- MVC para backend
