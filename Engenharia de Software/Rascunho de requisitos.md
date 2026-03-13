@@ -9,4 +9,7 @@
 ### Frontend
 
 - React
--
+- Tailwind
+- Bibliotecas de ícones de terceiros
+
+###
