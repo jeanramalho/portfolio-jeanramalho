@@ -12,4 +12,8 @@
 - Tailwind
 - Bibliotecas de ícones de terceiros
 
-###
+### Backend
+
+- Nodejs
+- Express
+- Supabase
