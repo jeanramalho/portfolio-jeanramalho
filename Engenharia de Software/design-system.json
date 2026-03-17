@@ -1,0 +1,55 @@
+{
+  "colors": {
+    "background": [
+      "#07090e",
+      "#db2777",
+      "#ffffff",
+      "#111827",
+      "#1f2937",
+      "rgba(0, 0, 0, 0.6)",
+      "#000000",
+      "rgba(255, 255, 255, 0.5)"
+    ],
+    "text": [
+      "#000000",
+      "#ffffff",
+      "#475569",
+      "#db2777",
+      "#64748b",
+      "#e2e8f0",
+      "#94a3b8",
+      "#cccccc",
+      "#999999"
+    ],
+    "primary": "#db2777"
+  },
+  "typography": {
+    "fonts": {
+      "heading": "Montserrat, sans-serif",
+      "body": "Montserrat, sans-serif",
+      "fallback": "\"Open Sans\", Helvetica, Arial, sans-serif"
+    },
+    "scale": {
+      "h1": {
+        "fontSize": "36px",
+        "lineHeight": "40px",
+        "fontWeight": "700"
+      },
+      "h3": {
+        "fontSize": "20px",
+        "lineHeight": "28px",
+        "fontWeight": "700"
+      },
+      "p": {
+        "fontSize": "16px",
+        "lineHeight": "24px",
+        "fontWeight": "400"
+      },
+      "a": {
+        "fontSize": "16px",
+        "lineHeight": "24px",
+        "fontWeight": "700"
+      }
+    }
+  }
+}

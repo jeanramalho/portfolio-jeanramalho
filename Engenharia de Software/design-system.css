@@ -1,0 +1,42 @@
+:root {
+  /* Colors - Backgrounds */
+  --color-bg-base: #07090e;
+  --color-bg-primary: #db2777; /* primary pink */
+  --color-bg-surface: #111827;
+  --color-bg-surface-alt: #1f2937;
+  --color-bg-white: #ffffff;
+  --color-bg-overlay: rgba(0, 0, 0, 0.6);
+  --color-bg-black: #000000;
+  --color-bg-glass: rgba(255, 255, 255, 0.5);
+
+  /* Colors - Text */
+  --color-text-invert: #000000;
+  --color-text-base: #ffffff;
+  --color-text-muted: #94a3b8;
+  --color-text-dim: #64748b;
+  --color-text-primary: #db2777;
+  --color-text-light: #e2e8f0;
+  --color-text-dark: #475569;
+
+  /* Typography - Families */
+  --font-heading: 'Montserrat', sans-serif;
+  --font-body: 'Montserrat', sans-serif;
+  --font-fallback: 'Open Sans', Helvetica, Arial, sans-serif;
+
+  /* Typography - Scale (from computed styles) */
+  --text-h1-size: 36px;
+  --text-h1-height: 40px;
+  --text-h1-weight: 700;
+
+  --text-h3-size: 20px;
+  --text-h3-height: 28px;
+  --text-h3-weight: 700;
+
+  --text-p-size: 16px;
+  --text-p-height: 24px;
+  --text-p-weight: 400;
+
+  --text-a-size: 16px;
+  --text-a-height: 24px;
+  --text-a-weight: 700;
+}
