@@ -1,14 +1,6 @@
 import { useState, useEffect } from 'react';
-import { 
-  mockProfile, 
-  mockExperiences, 
-  mockEducation, 
-  mockSkills,
-  Profile,
-  Experience,
-  Education,
-  SkillCategory
-} from '../models/cv_data';
+import { mockProfile, mockExperiences, mockEducation, mockSkills } from '../models/cv_data';
+import type { Profile, Experience, Education, SkillCategory } from '../models/cv_data';
 
 export interface PortfolioViewModel {
   profile: Profile | null;
