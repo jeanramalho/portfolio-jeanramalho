@@ -25,4 +25,4 @@
 
 ### Fluxo
 
-- O portfolio deve ter um endpoint com um frontend separado para alimentar o backend que salvará no banco de dados com uma interface amigavel. 
+- O portfolio deve ter um endpoint com um frontend separado para alimentar o backend que salvará no banco de dados com uma interface amigavel. O endpoint principal do portfolio realizarã consultas no banco de dados que foi alimentado pelo admin para preencher as sessões do site.
