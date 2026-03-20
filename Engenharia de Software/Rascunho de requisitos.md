@@ -25,4 +25,4 @@
 
 ### Fluxo
 
-- O r
+- O portfolio deve ter um endpoint com um frontend separado para alimentar o backend com 
