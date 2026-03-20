@@ -22,3 +22,7 @@
 
 - MVVM para frontend
 - MVC para backend
+
+### Fluxo
+
+- O r
