@@ -25,4 +25,4 @@
 
 ### Fluxo
 
-- O portfolio deve ter um endpoint com um frontend separado para alimentar o backend com 
+- O portfolio deve ter um endpoint com um frontend separado para alimentar o backend que salvará no banco de dados com uma interface amigavel. 
