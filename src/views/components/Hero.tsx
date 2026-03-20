@@ -1,5 +1,6 @@
 import type { Profile } from '../../models/cv_data';
 import { Terminal, Download, ArrowRight } from 'lucide-react';
+import profilePic from '../../assets/Perfil.jpeg';
 
 interface HeroProps {
   profile: Profile;
@@ -53,11 +54,11 @@ const Hero: React.FC<HeroProps> = ({ profile }) => {
           <div className="absolute -inset-1 bg-gradient-to-r from-sky-500 to-emerald-500 rounded-full blur opacity-60 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
           
           {/* Image Container */}
-          <div className="relative w-56 h-56 md:w-80 md:h-80 rounded-full p-1 bg-[var(--color-surface)]">
+          <div className="relative w-56 h-56 md:w-80 md:h-80 rounded-full p-1 bg-[var(--color-surface)] flex items-center justify-center overflow-hidden">
             <img 
-              src={`${profile.github}.png`} 
+              src={profilePic} 
               alt={`Foto de perfil de ${profile.name}`} 
-              className="w-full h-full object-cover rounded-full border-4 border-[var(--color-base)] shadow-2xl"
+              className="w-full h-full object-cover rounded-full border-4 border-[var(--color-base)] shadow-2xl relative z-10"
             />
           </div>
         </div>
