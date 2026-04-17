@@ -1,7 +1,8 @@
+import type { ReactNode } from "react";
 import { MacWindow } from "./MacWindow";
 import { Code2 } from "lucide-react";
 
-const codeLines: { n: number; tokens: React.ReactNode }[] = [
+const codeLines: { n: number; tokens: ReactNode }[] = [
   {
     n: 1,
     tokens: (

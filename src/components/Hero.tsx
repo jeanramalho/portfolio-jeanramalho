@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { MacWindow } from "./MacWindow";
 import { Terminal as TerminalIcon, ArrowDown } from "lucide-react";
 
@@ -9,7 +10,7 @@ const TerminalLine = ({
 }: {
   prompt?: string;
   path?: string;
-  command: React.ReactNode;
+  command: ReactNode;
   delay?: number;
 }) => (
   <div
