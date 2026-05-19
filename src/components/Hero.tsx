@@ -1,9 +1,7 @@
 import type { ReactNode } from "react";
 import { MacWindow } from "./MacWindow";
-import { ProfileCard } from "./ProfileCard";
 import { Terminal as TerminalIcon, ArrowDown } from "lucide-react";
 import profileImage from "@/assets/Perfil Jean.jpeg";
-import type { ProfileData } from "@/types/profile";
 
 const TerminalLine = ({
   prompt = "jean@dev",
@@ -29,29 +27,15 @@ const TerminalLine = ({
 );
 
 export const Hero = () => {
-  // Profile data - estrutura preparada para consumir do backend
-  const profileData: ProfileData = {
-    name: "Jean Ramalho",
-    image: profileImage,
-    title: "Full-Stack Developer",
-    bio: "Construindo interfaces que importam",
-  };
-
   return (
     <section
       id="home"
-      className="relative flex flex-col items-center justify-center px-4 pt-20 pb-12 min-h-screen"
+      className="relative min-h-screen flex items-center justify-center px-4 pt-20 pb-12"
     >
       <div className="absolute inset-0 grid-bg opacity-30 pointer-events-none" />
       <div className="absolute top-1/4 -left-20 w-96 h-96 rounded-full bg-primary/20 blur-[120px] animate-glow-pulse pointer-events-none" />
       <div className="absolute bottom-1/4 -right-20 w-96 h-96 rounded-full bg-accent/20 blur-[120px] pointer-events-none" />
 
-      {/* Profile Card - Top Section */}
-      <div className="relative w-full max-w-2xl mx-auto mb-12">
-        <ProfileCard data={profileData} />
-      </div>
-
-      {/* Main Content - Bottom Section */}
       <div className="relative w-full max-w-5xl mx-auto grid lg:grid-cols-5 gap-6 items-center">
         {/* Left: Identity card */}
         <div className="lg:col-span-3 space-y-6 animate-fade-up">
@@ -60,18 +44,36 @@ export const Hero = () => {
             <span className="text-muted-foreground">disponível para projetos</span>
           </div>
 
-          <div>
-            <p className="font-mono text-sm text-[hsl(var(--purple-glow))] mb-3">
-              <span className="code-comment">// hello world, I'm</span>
-            </p>
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.05]">
-              Jean <span className="gradient-text">Ramalho</span>
-            </h1>
-            <p className="mt-4 text-lg sm:text-xl text-muted-foreground max-w-xl">
-              Desenvolvedor Full-Stack construindo interfaces performáticas e
-              experiências que parecem nativas.
-            </p>
+          <div className="flex items-start gap-3 sm:gap-6">
+            {/* Text and Title */}
+            <div className="flex-1 min-w-0">
+              <p className="font-mono text-sm text-[hsl(var(--purple-glow))] mb-3">
+                <span className="code-comment">// hello world, I'm</span>
+              </p>
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.05]">
+                Jean <span className="gradient-text">Ramalho</span>
+              </h1>
+            </div>
+
+            {/* Profile Image */}
+            <div className="flex flex-shrink-0">
+              <div className="relative w-24 h-24 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40">
+                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-primary via-accent to-primary opacity-20 blur-lg" />
+                <div className="absolute inset-1 rounded-full border border-primary/40 overflow-hidden">
+                  <img
+                    src={profileImage}
+                    alt="Jean Ramalho"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              </div>
+            </div>
           </div>
+
+          <p className="mt-4 text-lg sm:text-xl text-muted-foreground max-w-xl">
+            Desenvolvedor Full-Stack construindo interfaces performáticas e
+            experiências que parecem nativas.
+          </p>
 
           <div className="flex flex-wrap gap-3">
             <a
