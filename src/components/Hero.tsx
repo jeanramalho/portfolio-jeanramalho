@@ -1,6 +1,9 @@
 import type { ReactNode } from "react";
 import { MacWindow } from "./MacWindow";
+import { ProfileCard } from "./ProfileCard";
 import { Terminal as TerminalIcon, ArrowDown } from "lucide-react";
+import profileImage from "@/assets/Perfil Jean.jpeg";
+import type { ProfileData } from "@/types/profile";
 
 const TerminalLine = ({
   prompt = "jean@dev",
@@ -26,15 +29,29 @@ const TerminalLine = ({
 );
 
 export const Hero = () => {
+  // Profile data - estrutura preparada para consumir do backend
+  const profileData: ProfileData = {
+    name: "Jean Ramalho",
+    image: profileImage,
+    title: "Full-Stack Developer",
+    bio: "Construindo interfaces que importam",
+  };
+
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center justify-center px-4 pt-20 pb-12"
+      className="relative flex flex-col items-center justify-center px-4 pt-20 pb-12 min-h-screen"
     >
       <div className="absolute inset-0 grid-bg opacity-30 pointer-events-none" />
       <div className="absolute top-1/4 -left-20 w-96 h-96 rounded-full bg-primary/20 blur-[120px] animate-glow-pulse pointer-events-none" />
       <div className="absolute bottom-1/4 -right-20 w-96 h-96 rounded-full bg-accent/20 blur-[120px] pointer-events-none" />
 
+      {/* Profile Card - Top Section */}
+      <div className="relative w-full max-w-2xl mx-auto mb-12">
+        <ProfileCard data={profileData} />
+      </div>
+
+      {/* Main Content - Bottom Section */}
       <div className="relative w-full max-w-5xl mx-auto grid lg:grid-cols-5 gap-6 items-center">
         {/* Left: Identity card */}
         <div className="lg:col-span-3 space-y-6 animate-fade-up">
