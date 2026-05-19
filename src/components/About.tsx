@@ -1,4 +1,5 @@
 import { MacWindow } from "./MacWindow";
+import profileImage from "@/assets/Perfil Jean.jpeg";
 import { FileCode2, User, Folder, Image as ImageIcon, Music, Download } from "lucide-react";
 
 const sidebarItems = [
@@ -53,43 +54,58 @@ export const About = () => {
               <span>~/documentos/sobre-jean.md</span>
             </div>
 
-            <article className="space-y-4 text-foreground/90 leading-relaxed">
-              <p>
-                Olá! Sou <strong className="text-foreground">Jean Ramalho</strong>,
-                desenvolvedor apaixonado por transformar ideias em produtos digitais
-                bem construídos — do back-end à última animação da interface.
-              </p>
-              <p>
-                Tenho um carinho especial por <span className="text-[hsl(var(--purple-glow))]">design de sistemas</span>,
-                arquiteturas limpas e detalhes que fazem a diferença. Acredito que
-                <em> bom código se lê como prosa</em> e que UX de qualidade é
-                indistinguível de magia.
-              </p>
-              <p className="font-mono text-sm bg-secondary/50 border border-border/50 rounded-lg p-4">
-                <span className="code-comment">// stack atual</span>
-                <br />
-                <span className="code-keyword">const</span>{" "}
-                <span className="code-var">stack</span>{" "}
-                <span className="code-punct">=</span>{" "}
-                <span className="code-punct">[</span>
-                <br />
-                {"  "}
-                <span className="code-string">"React"</span>
-                <span className="code-punct">, </span>
-                <span className="code-string">"TypeScript"</span>
-                <span className="code-punct">, </span>
-                <span className="code-string">"Node.js"</span>
-                <span className="code-punct">,</span>
-                <br />
-                {"  "}
-                <span className="code-string">"Tailwind"</span>
-                <span className="code-punct">, </span>
-                <span className="code-string">"PostgreSQL"</span>
-                <span className="code-punct">, </span>
-                <span className="code-string">"AWS"</span>
-                <br />
-                <span className="code-punct">];</span>
-              </p>
+            <article className="flex flex-col lg:flex-row lg:items-start gap-6 text-foreground/90 leading-relaxed">
+              <div className="flex justify-center lg:justify-start flex-shrink-0">
+                <div className="relative w-32 h-32 sm:w-36 sm:h-36 lg:w-40 lg:h-40">
+                  <div className="absolute inset-0 rounded-full bg-gradient-to-r from-primary via-accent to-primary opacity-20 blur-lg" />
+                  <div className="absolute inset-1 rounded-full border border-primary/40 overflow-hidden bg-secondary/30">
+                    <img
+                      src={profileImage}
+                      alt="Jean Ramalho"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex-1 space-y-4">
+                <p>
+                  Olá! Sou <strong className="text-foreground">Jean Ramalho</strong>,
+                  desenvolvedor apaixonado por transformar ideias em produtos digitais
+                  bem construídos — do back-end à última animação da interface.
+                </p>
+                <p>
+                  Tenho um carinho especial por <span className="text-[hsl(var(--purple-glow))]">design de sistemas</span>,
+                  arquiteturas limpas e detalhes que fazem a diferença. Acredito que
+                  <em> bom código se lê como prosa</em> e que UX de qualidade é
+                  indistinguível de magia.
+                </p>
+                <p className="font-mono text-sm bg-secondary/50 border border-border/50 rounded-lg p-4">
+                  <span className="code-comment">// stack atual</span>
+                  <br />
+                  <span className="code-keyword">const</span>{" "}
+                  <span className="code-var">stack</span>{" "}
+                  <span className="code-punct">=</span>{" "}
+                  <span className="code-punct">[</span>
+                  <br />
+                  {"  "}
+                  <span className="code-string">"React"</span>
+                  <span className="code-punct">, </span>
+                  <span className="code-string">"TypeScript"</span>
+                  <span className="code-punct">, </span>
+                  <span className="code-string">"Node.js"</span>
+                  <span className="code-punct">,</span>
+                  <br />
+                  {"  "}
+                  <span className="code-string">"Tailwind"</span>
+                  <span className="code-punct">, </span>
+                  <span className="code-string">"PostgreSQL"</span>
+                  <span className="code-punct">, </span>
+                  <span className="code-string">"AWS"</span>
+                  <br />
+                  <span className="code-punct">];</span>
+                </p>
+              </div>
             </article>
           </div>
         </MacWindow>
