@@ -44,36 +44,18 @@ export const Hero = () => {
             <span className="text-muted-foreground">disponível para projetos</span>
           </div>
 
-          <div className="flex items-start gap-3 sm:gap-6">
-            {/* Text and Title */}
-            <div className="flex-1 min-w-0">
-              <p className="font-mono text-sm text-[hsl(var(--purple-glow))] mb-3">
-                <span className="code-comment">// hello world, I'm</span>
-              </p>
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.05]">
-                Jean <span className="gradient-text">Ramalho</span>
-              </h1>
-            </div>
-
-            {/* Profile Image */}
-            <div className="flex flex-shrink-0">
-              <div className="relative w-24 h-24 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40">
-                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-primary via-accent to-primary opacity-20 blur-lg" />
-                <div className="absolute inset-1 rounded-full border border-primary/40 overflow-hidden">
-                  <img
-                    src={profileImage}
-                    alt="Jean Ramalho"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              </div>
-            </div>
+          <div>
+            <p className="font-mono text-sm text-[hsl(var(--purple-glow))] mb-3">
+              <span className="code-comment">// hello world, I'm</span>
+            </p>
+            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.05]">
+              Jean <span className="gradient-text">Ramalho</span>
+            </h1>
+            <p className="mt-4 text-lg sm:text-xl text-muted-foreground max-w-xl">
+              Desenvolvedor Full-Stack construindo interfaces performáticas e
+              experiências que parecem nativas.
+            </p>
           </div>
-
-          <p className="mt-4 text-lg sm:text-xl text-muted-foreground max-w-xl">
-            Desenvolvedor Full-Stack construindo interfaces performáticas e
-            experiências que parecem nativas.
-          </p>
 
           <div className="flex flex-wrap gap-3">
             <a
