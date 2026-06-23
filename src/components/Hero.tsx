@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import { MacWindow } from "./MacWindow";
 import { Terminal as TerminalIcon, ArrowDown } from "lucide-react";
-import profileImage from "@/assets/Perfil Jean.jpeg";
+import type { PortfolioContent } from "@/content/portfolio";
 
 const TerminalLine = ({
   prompt = "jean@dev",
@@ -26,7 +26,11 @@ const TerminalLine = ({
   </div>
 );
 
-export const Hero = () => {
+interface HeroProps {
+  content: PortfolioContent["hero"];
+}
+
+export const Hero = ({ content }: HeroProps) => {
   return (
     <section
       id="home"
@@ -41,19 +45,18 @@ export const Hero = () => {
         <div className="lg:col-span-3 space-y-6 animate-fade-up">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-border bg-card/60 backdrop-blur-sm font-mono text-xs">
             <span className="w-2 h-2 rounded-full bg-[hsl(var(--mac-green))] animate-pulse" />
-            <span className="text-muted-foreground">disponível para projetos</span>
+            <span className="text-muted-foreground">{content.availability}</span>
           </div>
 
           <div>
             <p className="font-mono text-sm text-[hsl(var(--purple-glow))] mb-3">
-              <span className="code-comment">// hello world, I'm</span>
+              <span className="code-comment">{content.intro}</span>
             </p>
             <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.05]">
-              Jean <span className="gradient-text">Ramalho</span>
+              {content.name} <span className="gradient-text">{content.highlightName}</span>
             </h1>
             <p className="mt-4 text-lg sm:text-xl text-muted-foreground max-w-xl">
-              Desenvolvedor Full-Stack construindo interfaces performáticas e
-              experiências que parecem nativas.
+              {content.headline}
             </p>
           </div>
 
@@ -62,14 +65,14 @@ export const Hero = () => {
               href="#projects"
               className="group inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-br from-primary to-accent text-primary-foreground font-medium text-sm shadow-[var(--shadow-glow)] hover:scale-[1.03] active:scale-[0.98] transition-transform"
             >
-              ./ver_projetos
+              {content.primaryCta}
               <ArrowDown className="w-4 h-4 group-hover:translate-y-0.5 transition-transform" />
             </a>
             <a
               href="#contact"
               className="inline-flex items-center gap-2 px-5 py-3 rounded-xl border border-border bg-card/60 backdrop-blur-sm font-medium text-sm text-foreground hover:border-primary/60 hover:bg-card transition-colors"
             >
-              cat contato.txt
+              {content.secondaryCta}
             </a>
           </div>
 
@@ -78,7 +81,7 @@ export const Hero = () => {
             <span className="text-[hsl(var(--cyan-code))]">brand</span>{" "}
             <span className="code-punct">=</span>{" "}
             <span className="text-[hsl(var(--green-code))]">
-              "&lt;/jeanramalho.dev&gt;"
+              "{content.brandConst}"
             </span>
             <span className="code-punct">;</span>
           </p>
@@ -97,7 +100,7 @@ export const Hero = () => {
               className="font-mono text-sm text-muted-foreground pl-2 animate-fade-in"
               style={{ animationDelay: "300ms" }}
             >
-              jean_ramalho — full-stack dev 🚀
+              {content.terminalIdentity}
             </div>
 
             <TerminalLine command={<span className="text-foreground">ls ./skills</span>} delay={500} />
@@ -105,10 +108,11 @@ export const Hero = () => {
               className="font-mono text-sm pl-2 grid grid-cols-2 gap-x-3 animate-fade-in"
               style={{ animationDelay: "700ms" }}
             >
-              <span className="text-[hsl(var(--cyan-code))]">react.tsx</span>
-              <span className="text-[hsl(var(--cyan-code))]">node.js</span>
-              <span className="text-[hsl(var(--cyan-code))]">typescript</span>
-              <span className="text-[hsl(var(--cyan-code))]">tailwind</span>
+              {content.terminalSkills.map((skill) => (
+                <span key={skill} className="text-[hsl(var(--cyan-code))]">
+                  {skill}
+                </span>
+              ))}
             </div>
 
             <TerminalLine
@@ -119,7 +123,7 @@ export const Hero = () => {
               className="font-mono text-sm text-[hsl(var(--green-code))] pl-2 animate-fade-in"
               style={{ animationDelay: "1100ms" }}
             >
-              "build things that matter"
+              "{content.terminalMission}"
             </div>
 
             <div

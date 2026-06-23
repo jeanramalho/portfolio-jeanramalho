@@ -1,6 +1,7 @@
 import { MacWindow } from "./MacWindow";
 import profileImage from "@/assets/Perfil Jean.jpeg";
 import { FileCode2, User, Folder, Image as ImageIcon, Music, Download } from "lucide-react";
+import type { PortfolioContent } from "@/content/portfolio";
 
 const sidebarItems = [
   { icon: User, label: "AirDrop" },
@@ -11,15 +12,21 @@ const sidebarItems = [
   { icon: Music, label: "Música" },
 ];
 
-export const About = () => {
+interface AboutProps {
+  content: PortfolioContent["about"];
+}
+
+export const About = ({ content }: AboutProps) => {
   return (
     <section id="about" className="relative px-4 py-24">
       <div className="max-w-5xl mx-auto">
         <header className="mb-8 animate-fade-up">
           <p className="font-mono text-sm text-[hsl(var(--purple-glow))]">
-            <span className="code-comment">// 01.</span> sobre
+            <span className="code-comment">{content.eyebrow}</span>
           </p>
-          <h2 className="text-3xl sm:text-4xl font-bold mt-2">Sobre <span className="gradient-text">mim</span></h2>
+          <h2 className="text-3xl sm:text-4xl font-bold mt-2">
+            {content.title} <span className="gradient-text">{content.highlightedTitle}</span>
+          </h2>
         </header>
 
         <MacWindow
@@ -51,7 +58,7 @@ export const About = () => {
           <div className="col-span-12 sm:col-span-9 p-6 sm:p-8">
             <div className="font-mono text-xs text-muted-foreground mb-4 flex items-center gap-2">
               <FileCode2 className="w-3.5 h-3.5" />
-              <span>~/documentos/sobre-jean.md</span>
+              <span>{content.fileName}</span>
             </div>
 
             <article className="flex flex-col lg:flex-row lg:items-start gap-6 text-foreground/90 leading-relaxed">
@@ -69,17 +76,9 @@ export const About = () => {
               </div>
 
               <div className="flex-1 space-y-4">
-                <p>
-                  Olá! Sou <strong className="text-foreground">Jean Ramalho</strong>,
-                  desenvolvedor apaixonado por transformar ideias em produtos digitais
-                  bem construídos — do back-end à última animação da interface.
-                </p>
-                <p>
-                  Tenho um carinho especial por <span className="text-[hsl(var(--purple-glow))]">design de sistemas</span>,
-                  arquiteturas limpas e detalhes que fazem a diferença. Acredito que
-                  <em> bom código se lê como prosa</em> e que UX de qualidade é
-                  indistinguível de magia.
-                </p>
+                {content.paragraphs.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
                 <p className="font-mono text-sm bg-secondary/50 border border-border/50 rounded-lg p-4">
                   <span className="code-comment">// stack atual</span>
                   <br />
@@ -89,19 +88,24 @@ export const About = () => {
                   <span className="code-punct">[</span>
                   <br />
                   {"  "}
-                  <span className="code-string">"React"</span>
-                  <span className="code-punct">, </span>
-                  <span className="code-string">"TypeScript"</span>
-                  <span className="code-punct">, </span>
-                  <span className="code-string">"Node.js"</span>
-                  <span className="code-punct">,</span>
-                  <br />
-                  {"  "}
-                  <span className="code-string">"Tailwind"</span>
-                  <span className="code-punct">, </span>
-                  <span className="code-string">"PostgreSQL"</span>
-                  <span className="code-punct">, </span>
-                  <span className="code-string">"AWS"</span>
+                  {content.stack.map((item, index) => {
+                    const shouldBreak = index === 2 && index < content.stack.length - 1;
+
+                    return (
+                      <span key={item}>
+                        <span className="code-string">"{item}"</span>
+                        {index < content.stack.length - 1 && <span className="code-punct">,</span>}
+                        {shouldBreak ? (
+                          <>
+                            <br />
+                            {"  "}
+                          </>
+                        ) : (
+                          index < content.stack.length - 1 && <span> </span>
+                        )}
+                      </span>
+                    );
+                  })}
                   <br />
                   <span className="code-punct">];</span>
                 </p>

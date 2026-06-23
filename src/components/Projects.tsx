@@ -1,56 +1,29 @@
 import { MacWindow } from "./MacWindow";
 import { ExternalLink, Github, Folder } from "lucide-react";
+import type { PortfolioContent } from "@/content/portfolio";
 
-const projects = [
-  {
-    name: "nebula-ui",
-    tagline: "Design system com 60+ componentes acessíveis",
-    desc: "Biblioteca React + TS publicada no npm, focada em performance e dark mode nativo.",
-    tags: ["React", "TypeScript", "Storybook"],
-    color: "from-[hsl(var(--purple))] to-[hsl(var(--purple-glow))]",
-  },
-  {
-    name: "orbit-api",
-    tagline: "Backend escalável para SaaS multi-tenant",
-    desc: "Node.js, Postgres e Redis. Autenticação JWT, rate limiting e jobs em fila.",
-    tags: ["Node.js", "PostgreSQL", "Redis"],
-    color: "from-[hsl(var(--cyan-code))] to-[hsl(var(--purple))]",
-  },
-  {
-    name: "lume.app",
-    tagline: "App de produtividade com sync offline-first",
-    desc: "PWA com IndexedDB, conflict resolution e UI inspirada em apps nativos.",
-    tags: ["React", "PWA", "IndexedDB"],
-    color: "from-[hsl(var(--pink-code))] to-[hsl(var(--purple-glow))]",
-  },
-  {
-    name: "pulse-cli",
-    tagline: "Ferramenta de DX para times de produto",
-    desc: "CLI em Node que automatiza setup, deploy e telemetria de microserviços.",
-    tags: ["Node.js", "CLI", "DevOps"],
-    color: "from-[hsl(var(--green-code))] to-[hsl(var(--cyan-code))]",
-  },
-];
+interface ProjectsProps {
+  content: PortfolioContent["projects"];
+}
 
-export const Projects = () => {
+export const Projects = ({ content }: ProjectsProps) => {
   return (
     <section id="projects" className="relative px-4 py-24">
       <div className="max-w-6xl mx-auto">
         <header className="mb-8 animate-fade-up">
           <p className="font-mono text-sm text-[hsl(var(--purple-glow))]">
-            <span className="code-comment">// 02.</span> projetos
+            <span className="code-comment">{content.eyebrow}</span>
           </p>
           <h2 className="text-3xl sm:text-4xl font-bold mt-2">
-            Projetos <span className="gradient-text">selecionados</span>
+            {content.title} <span className="gradient-text">{content.highlightedTitle}</span>
           </h2>
           <p className="text-muted-foreground mt-2 max-w-xl">
-            Janelas para alguns dos trabalhos que mais me orgulho — cada um com uma
-            história de decisões técnicas por trás.
+            {content.description}
           </p>
         </header>
 
         <div className="grid md:grid-cols-2 gap-6">
-          {projects.map((p, i) => (
+          {content.items.map((p, i) => (
             <MacWindow
               key={p.name}
               title={`${p.name} — VS Code`}
@@ -96,13 +69,13 @@ export const Projects = () => {
 
                   <div className="flex items-center gap-3 pt-2 border-t border-border/40">
                     <a
-                      href="#"
+                      href={p.sourceHref}
                       className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary transition-colors"
                     >
                       <Github className="w-3.5 h-3.5" /> source
                     </a>
                     <a
-                      href="#"
+                      href={p.demoHref}
                       className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary transition-colors"
                     >
                       <ExternalLink className="w-3.5 h-3.5" /> live demo
