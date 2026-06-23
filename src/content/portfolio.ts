@@ -26,7 +26,7 @@ export const contactLinkSchema = z.object({
 
 export const customSectionSchema = z.object({
   id: z.string().min(1),
-  type: z.enum(["text", "cards", "carousel"]),
+  type: z.enum(["text", "cards", "carousel", "gallery", "timeline", "cta", "code", "stats"]),
   title: z.string().min(1),
   eyebrow: z.string().min(1),
   description: z.string(),
