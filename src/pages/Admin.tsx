@@ -31,10 +31,9 @@ import {
   type PortfolioContent,
   type Project,
 } from "@/content/portfolio";
+import { getSectionFormat, sectionFormatOptions, sectionLayoutOptions } from "@/content/sectionFormats";
 import { usePortfolioContent } from "@/hooks/usePortfolioContent";
 
-const sectionTypes: CustomSection["type"][] = ["text", "cards", "carousel"];
-const layoutTypes: CustomSection["layout"][] = ["compact", "split", "grid"];
 const projectColors = [
   "from-[hsl(var(--purple))] to-[hsl(var(--purple-glow))]",
   "from-[hsl(var(--cyan-code))] to-[hsl(var(--purple))]",
@@ -362,20 +361,43 @@ const ContactLinkEditor = ({ link, index, updateContent }: { link: ContactLink; 
 const CustomSectionsEditor = ({ content, updateContent }: EditorProps) => (
   <div className="space-y-4">
     <p className="text-sm text-muted-foreground">
-      Crie seções novas com layouts controlados pelo design system. Depois selecione a seção na lateral para editar seus cards.
+      Crie seções novas com layouts controlados pelo design system. Depois selecione a seção na lateral para editar conteúdo, tipo e itens.
     </p>
-    <Button onClick={() => updateContent((draft) => ({ ...draft, customSections: [...draft.customSections, emptyCustomSection()] }))}>
-      <Plus className="w-4 h-4" />
-      Criar seção
-    </Button>
-    <div className="grid md:grid-cols-2 gap-4">
-      {content.customSections.map((section) => (
-        <div key={section.id} className="rounded-lg border border-border bg-secondary/20 p-4">
-          <p className="font-mono text-sm text-foreground">{section.title}</p>
-          <p className="text-xs text-muted-foreground mt-1">{section.type} / {section.layout}</p>
-        </div>
+
+    <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-4">
+      {sectionFormatOptions.map((format) => (
+        <button
+          key={format.type}
+          onClick={() =>
+            updateContent((draft) => ({
+              ...draft,
+              customSections: [...draft.customSections, emptyCustomSection(format.type)],
+            }))
+          }
+          className="rounded-lg border border-border bg-secondary/20 p-4 text-left transition-colors hover:border-primary/60 hover:bg-secondary/40"
+        >
+          <p className="font-mono text-sm text-foreground">{format.label}</p>
+          <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{format.description}</p>
+        </button>
       ))}
     </div>
+
+    {content.customSections.length > 0 && (
+      <div className="grid md:grid-cols-2 gap-4 pt-2">
+        {content.customSections.map((section) => {
+          const format = getSectionFormat(section.type);
+
+          return (
+            <div key={section.id} className="rounded-lg border border-border bg-secondary/20 p-4">
+              <p className="font-mono text-sm text-foreground">{section.title}</p>
+              <p className="text-xs text-muted-foreground mt-1">
+                {format.label} / {section.layout} / {section.enabled ? "ativa" : "inativa"}
+              </p>
+            </div>
+          );
+        })}
+      </div>
+    )}
   </div>
 );
 
@@ -396,13 +418,19 @@ const CustomSectionEditor = ({ section, content, updateContent }: { section: Cus
         <Field label="Tipo">
           <Select value={section.type} onValueChange={(type: CustomSection["type"]) => updateSection({ type })}>
             <SelectTrigger><SelectValue /></SelectTrigger>
-            <SelectContent>{sectionTypes.map((type) => <SelectItem key={type} value={type}>{type}</SelectItem>)}</SelectContent>
+            <SelectContent>
+              {sectionFormatOptions.map((format) => (
+                <SelectItem key={format.type} value={format.type}>
+                  {format.label}
+                </SelectItem>
+              ))}
+            </SelectContent>
           </Select>
         </Field>
         <Field label="Layout">
           <Select value={section.layout} onValueChange={(layout: CustomSection["layout"]) => updateSection({ layout })}>
             <SelectTrigger><SelectValue /></SelectTrigger>
-            <SelectContent>{layoutTypes.map((layout) => <SelectItem key={layout} value={layout}>{layout}</SelectItem>)}</SelectContent>
+            <SelectContent>{sectionLayoutOptions.map((layout) => <SelectItem key={layout} value={layout}>{layout}</SelectItem>)}</SelectContent>
           </Select>
         </Field>
         <Field label="Ativa">
@@ -412,7 +440,7 @@ const CustomSectionEditor = ({ section, content, updateContent }: { section: Cus
         </Field>
       </EditorGrid>
 
-      <ListHeader title="Itens da seção" onAdd={() => updateSection({ items: [...section.items, { title: "Novo card", description: "Descrição do card.", meta: "meta" }] })} />
+      <ListHeader title="Itens da seção" onAdd={() => updateSection({ items: [...section.items, emptySectionItem(section.type)] })} />
       {section.items.map((item, index) => (
         <div key={`${item.title}-${index}`} className="rounded-lg border border-border bg-secondary/20 p-4">
           <EditorGrid>
@@ -499,21 +527,66 @@ const emptyProject = (): Project => ({
   demoHref: "#",
 });
 
-const emptyCustomSection = (): CustomSection => ({
+const emptyCustomSection = (type: CustomSection["type"] = "cards"): CustomSection => {
+  const format = getSectionFormat(type);
+
+  return {
   id: `secao-${Date.now()}`,
-  type: "cards",
-  title: "Nova seção",
-  eyebrow: "// nova seção",
-  description: "Descrição da nova seção.",
-  layout: "grid",
+  type,
+  title: `Nova seção de ${format.label.toLowerCase()}`,
+  eyebrow: `// ${format.label.toLowerCase()}`,
+  description: format.description,
+  layout: format.defaultLayout,
   enabled: true,
-  items: [
-    {
+  items: [emptySectionItem(type)],
+  };
+};
+
+const emptySectionItem = (type: CustomSection["type"]): CustomSection["items"][number] => {
+  const examples: Record<CustomSection["type"], CustomSection["items"][number]> = {
+    cards: {
       title: "Primeiro card",
       description: "Conteúdo inicial do card.",
       meta: "card.tsx",
     },
-  ],
-});
+    carousel: {
+      title: "Slide principal",
+      description: "Conteúdo do slide do carrossel.",
+      meta: "slide-01",
+    },
+    gallery: {
+      title: "Imagem destaque",
+      description: "Descrição visual para a galeria.",
+      meta: "gallery-item",
+    },
+    text: {
+      title: "Bloco editorial",
+      description: "Texto principal da seção.",
+      meta: "markdown",
+    },
+    timeline: {
+      title: "Marco importante",
+      description: "Descrição do acontecimento ou etapa.",
+      meta: "2026",
+    },
+    cta: {
+      title: "Vamos construir algo?",
+      description: "Chamada principal para contato ou próxima ação.",
+      meta: "disponível",
+    },
+    code: {
+      title: "cleanArchitecture",
+      description: "Componentes pequenos, contratos claros e evolução previsível.",
+      meta: "principle",
+    },
+    stats: {
+      title: "Projetos entregues",
+      description: "Indicador resumido para destacar experiência.",
+      meta: "12+",
+    },
+  };
+
+  return examples[type];
+};
 
 export default Admin;
