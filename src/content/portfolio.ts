@@ -1,12 +1,6 @@
 import { z } from "zod";
 
 export const ADMIN_STORAGE_KEY = "jeanramalho.portfolio.content";
-export const ADMIN_SESSION_KEY = "jeanramalho.admin.session";
-
-export const adminCredentials = {
-  email: "jeanramalho.dev@gmail.com",
-  password: "#Raikinha2012",
-};
 
 export const projectSchema = z.object({
   name: z.string().min(1),
