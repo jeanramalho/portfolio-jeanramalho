@@ -3,6 +3,7 @@ import { Navigate } from "react-router-dom";
 import {
   Eye,
   LayoutDashboard,
+  Loader2,
   LogOut,
   Plus,
   RotateCcw,
@@ -23,8 +24,6 @@ import {
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import {
-  ADMIN_SESSION_KEY,
-  adminCredentials,
   defaultPortfolioContent,
   type ContactLink,
   type CustomSection,
@@ -32,6 +31,7 @@ import {
   type Project,
 } from "@/content/portfolio";
 import { getSectionFormat, sectionFormatOptions, sectionLayoutOptions } from "@/content/sectionFormats";
+import { useAdminSession } from "@/hooks/useAdminSession";
 import { usePortfolioContent } from "@/hooks/usePortfolioContent";
 
 const projectColors = [
@@ -42,15 +42,31 @@ const projectColors = [
 ];
 
 const Admin = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(
-    () => window.sessionStorage.getItem(ADMIN_SESSION_KEY) === "true",
-  );
+  const { isAuthenticated, isConfigured, isLoading, signIn, signOut } = useAdminSession();
 
-  if (!isAuthenticated) {
-    return <AdminLogin onSuccess={() => setIsAuthenticated(true)} />;
+  if (isLoading) {
+    return (
+      <main className="min-h-screen px-4 py-16 flex items-center justify-center">
+        <MacWindow
+          title="admin-session.tsx"
+          icon={<LayoutDashboard className="w-3 h-3" />}
+          className="w-full max-w-md"
+          bodyClassName="p-6"
+        >
+          <div className="flex items-center gap-3 text-sm text-muted-foreground">
+            <Loader2 className="h-4 w-4 animate-spin" />
+            Verificando sessão Supabase...
+          </div>
+        </MacWindow>
+      </main>
+    );
   }
 
-  return <AdminPanel onLogout={() => setIsAuthenticated(false)} />;
+  if (!isAuthenticated) {
+    return <AdminLogin isConfigured={isConfigured} onSignIn={signIn} />;
+  }
+
+  return <AdminPanel onLogout={signOut} />;
 };
 
 const AdminLogin = ({ onSuccess }: { onSuccess: () => void }) => {
